@@ -6,14 +6,14 @@ nanosec_to_milisec = lambda x: round(x/1000000, 3)
 
 def test_all(param_dict):
     stats = {
-        'dir_list': test(param_dict, gr.DirList()),
-        'und_list': test(param_dict, gr.UndList()),
-        'dir_adj_mat': test(param_dict, gr.DirAdjacencyMatrix()),
-        'und_adj_mat': test(param_dict, gr.UndAdjacencyMatrix()),
-        'dir_inc_mat': test(param_dict, gr.DirIncidenceMatrix()),
-        'und_inc_mat': test(param_dict, gr.UndIncidenceMatrix()),
-        'dir_adj_list': test(param_dict, gr.DirAdjacencyList()),
-        'und_adj_list': test(param_dict, gr.UndAdjacencyList())
+        'd_l': test(param_dict, gr.DirList()),
+        'u_l': test(param_dict, gr.UndList()),
+        'd_a_m': test(param_dict, gr.DirAdjacencyMatrix()),
+        'u_a_m': test(param_dict, gr.UndAdjacencyMatrix()),
+        'd_i_m': test(param_dict, gr.DirIncidenceMatrix()),
+        'u_i_m': test(param_dict, gr.UndIncidenceMatrix()),
+        'd_a_l': test(param_dict, gr.DirAdjacencyList()),
+        'u_a_l': test(param_dict, gr.UndAdjacencyList())
     }
     return stats
 

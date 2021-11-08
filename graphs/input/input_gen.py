@@ -3,7 +3,7 @@ import os.path
 
 current_path = os.path.dirname(os.path.realpath(__file__))
 
-vertices = 2000
+vertices = 1000
 path = os.path.join(current_path, "1.txt")
 f = open(path, "w")
 f.write(str(vertices)+'\n')
@@ -14,7 +14,7 @@ f.write("0\n")
 f.write(f"{vertices-1}")
 f.close()
 
-vertices = 4000
+vertices = 2000
 path = os.path.join(current_path, "2.txt")
 f = open(path, "w")
 f.write(str(vertices)+'\n')

@@ -26,8 +26,8 @@ class UndList(DirList):
             self.graph.append([idx1, idx2])
 
     def get_neighbors(self, idx):
-        neighbors = super().get_neighbors(idx)
-        for e in self.graph:
-            if e[1] == idx:
-                neighbors.add(e[0])
-        return neighbors
+        return set(
+            e[(e.index(idx)+1)%2]
+            for e in self.graph
+            if idx in e
+        )

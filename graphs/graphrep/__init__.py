@@ -1,6 +1,6 @@
 """
 Package name 'graphrep' stands for graph representation.
-Parent class GraphRepr in graphrep.py creates an informal interface for other subclasses.
+Parent class GraphRepr in graphrep.py provides the same functionality among its children
 Subclasses follow naming convention:
 Dir* - subclass for implementing directed graph representation.
 Und* - subclass for implementing undirected graph representation.
