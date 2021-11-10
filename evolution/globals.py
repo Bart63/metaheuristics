@@ -1,0 +1,2 @@
+INPUT_FILENAME = 'objects.txt'
+INT_CHECK_INDEXES = [0,2,3]
