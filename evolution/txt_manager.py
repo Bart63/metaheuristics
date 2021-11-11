@@ -1,7 +1,7 @@
 from ntpath import realpath
 from os.path import join, realpath, dirname
 import globals as glob
-from object_model import ObjectModel
+from models import ObjectModel
 from typing import List, Tuple
 from sys import exit
 import io
