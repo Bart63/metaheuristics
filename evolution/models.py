@@ -1,3 +1,4 @@
+from __future__ import annotations
 from typing import List
 
 class ObjectModel():
@@ -8,7 +9,10 @@ class ObjectModel():
         self.value:int = value
 
 class ChromosomeModel():
-    def __init__(self, genes:List[bool]) -> None:
-        self.genes:List[bool] = genes
+    def __init__(self, gene:List[bool]) -> None:
+        self.gene:List[bool] = gene
         self.fitness:int = 0
         self.probability:float = 0
+        
+    def __lt__(self, other: ChromosomeModel):
+         return self.fitness['f'] < other.fitness['f']
