@@ -16,3 +16,6 @@ class ChromosomeModel():
         
     def __lt__(self, other: ChromosomeModel):
          return self.fitness['f'] < other.fitness['f']
+    
+    def __repr__(self) -> str:
+        return ' '.join([str(int(c)) for c in self.gene])

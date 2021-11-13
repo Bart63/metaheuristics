@@ -63,7 +63,14 @@ def roulette_selection(chromosomes:List[ChromosomeModel]) -> ChromosomeModel:
     else:
         return ranges[-1][0]
 
-def point_crossover(parent1: ChromosomeModel, parent2: ChromosomeModel) -> List[ChromosomeModel]:
+def tournament_selection(chromosomes:List[ChromosomeModel]) -> ChromosomeModel:
+    chromosomes_copy = chromosomes.copy()
+    random.shuffle(chromosomes_copy)
+    tournament_group = chromosomes_copy[:glob.TOURNAMENT_SIZE]
+    tournament_group.sort()
+    return tournament_group[0]
+
+def single_point_crossover(parent1: ChromosomeModel, parent2: ChromosomeModel) -> List[ChromosomeModel]:
     choose_point = lambda: random.randint(1, len(parent1.gene)-1)
     point = choose_point()
     children = [
@@ -71,6 +78,31 @@ def point_crossover(parent1: ChromosomeModel, parent2: ChromosomeModel) -> List[
         ChromosomeModel(parent2.gene[:point] + parent1.gene[point:])
     ] 
     return children
+
+def two_point_crossover(parent1: ChromosomeModel, parent2: ChromosomeModel) -> List[ChromosomeModel]:
+    choose_point = lambda: random.randint(1, len(parent1.gene)-1)
+    points = [0, 0]
+    while points[0] == points[1]:
+        points = [choose_point(), choose_point()]
+    points.sort()
+    children = [
+        ChromosomeModel(parent1.gene[:points[0]] + parent2.gene[points[0]:points[1]] + parent1.gene[points[1]:]),
+        ChromosomeModel(parent2.gene[:points[0]] + parent1.gene[points[0]:points[1]] + parent2.gene[points[1]:])
+    ] 
+    return children
+
+def uniform_crossover(parent1: ChromosomeModel, parent2: ChromosomeModel) -> List[ChromosomeModel]:
+    uniform_crossover = [random.randint(0, 1) for uc in range(len(parent1.gene))]
+    genes = [parent1.gene, parent2.gene]
+    child1 = ChromosomeModel([
+        genes[uc][idx]
+        for idx, uc in enumerate(uniform_crossover)
+    ])
+    child2 = ChromosomeModel([
+        genes[not uc][idx]
+        for idx, uc in enumerate(uniform_crossover)
+    ])
+    return [child1, child2]
 
 def mutate(chromosome: ChromosomeModel):
     gene = chromosome.gene
@@ -102,15 +134,24 @@ def main():
         roulette_selection(start_population),
         roulette_selection(start_population)
     ]
-    print(selected[0].gene)
-    print(selected[1].gene)
-    children = point_crossover(*selected)
-    print(children[0].gene)
-    print(children[1].gene)
-    copy_gene = children[1].gene.copy()
+    print(selected[0])
+    print(selected[1])
+    children_spc = single_point_crossover(*selected)
+    children_tpc = two_point_crossover(*selected)
+    children_uc = uniform_crossover(*selected)
+    print("SPC:")
+    print(children_spc[0])
+    print(children_spc[1])
+    print("TPC:")
+    print(children_tpc[0])
+    print(children_tpc[1])
+    print("UC:")
+    print(children_uc[0])
+    print(children_uc[1])
+    copy_gene = str(children_spc[1])
     print('Mutate:')
-    mutate(children[1])
-    print('Before & after:\n', copy_gene, '\n', children[1].gene)
+    mutate(children_spc[1])
+    print('Before & after:\n', copy_gene, '\n', children_spc[1])
 
 if __name__=='__main__':
     main()
@@ -122,6 +163,7 @@ czy
 - całej
 
 Selekcja rankingowa to selekcja ruletkowa z innym obliczaniem przydziału koła?
+Czy eliminujemy z przydziału części koła osobniki, które są na ostatnim miejscu?
 
 
 """
