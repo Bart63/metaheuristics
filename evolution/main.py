@@ -79,6 +79,11 @@ def single_point_crossover(parent1: ChromosomeModel, parent2: ChromosomeModel) -
     ] 
     return children
 
+def elite_selection(chromosomes: List[ChromosomeModel]):
+    chromosomes_copy = chromosomes.copy()
+    chromosomes_copy.sort()
+    return chromosomes_copy[:glob.ELITE_SIZE]
+
 def two_point_crossover(parent1: ChromosomeModel, parent2: ChromosomeModel) -> List[ChromosomeModel]:
     choose_point = lambda: random.randint(1, len(parent1.gene)-1)
     points = [0, 0]
