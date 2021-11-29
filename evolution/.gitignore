@@ -139,5 +139,3 @@ cython_debug/
 
 # Logs
 output/
-
-input/*.txt
