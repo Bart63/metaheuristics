@@ -1,0 +1,9 @@
+{
+    "ants_count": [10, 30, 50],
+    "rand_way_prob": [0.3],
+    "pheromone_weight": [1, 2],
+    "heuristic_weight": [1, 3],
+    "max_iterations": [1000],
+    "max_stagnations": [200],
+    "evaporation_coef": [0.1, 0.5]
+}
