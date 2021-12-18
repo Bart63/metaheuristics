@@ -18,7 +18,7 @@ class FileManager(metaclass=SingletonMeta):
         super(FileManager, self).__init__()
         self.inputs_rel:List[str] = listdir(get_path(INPUT_FOLDER))
         self.output_path:str = get_path(OUTPUT_FOLDER)
-        self.clear_stats()
+        #self.clear_stats()
         
     def get_inputs(self) -> Dict[str, List[List[int]]]:
         inputs = {}

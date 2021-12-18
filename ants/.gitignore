@@ -139,6 +139,6 @@ cython_debug/
 
 # Logs
 input/
-output/
+output*/
 graphs/
 charts.ipynb

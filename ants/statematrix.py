@@ -1,8 +1,7 @@
 from typing import List
-from helpers import SingletonMeta
 
 
-class StateMatrix(metaclass=SingletonMeta):
+class StateMatrix():
     def __init__(self, roads:List[List[int]]):
         self.places = [r[0] for r in roads]
         self.matrix = [[1] * len(roads) for _ in roads]
@@ -19,6 +18,6 @@ class StateMatrix(metaclass=SingletonMeta):
     
     def copy(self):
         sm_copy = StateMatrix([])
-        sm_copy.places = self.places
-        sm_copy.matrix = self.matrix
+        sm_copy.places = self.places.copy()
+        sm_copy.matrix = [m.copy() for m in self.matrix]
         return sm_copy

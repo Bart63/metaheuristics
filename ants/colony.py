@@ -31,7 +31,6 @@ class Colony:
             for i2, _ in enumerate(sm.matrix[:i1+1]):
                 row[i2] *= (1 - self.params['evaporation_coef'])
                 for ant in self.colony:
-                    # W prezentacji aktualizuje bez sprawdzenia czy mrówka przeszła daną drogą
                     ri1, ri2 = ant.visited.index(i1), ant.visited.index(i2)
                     if abs(ri1 - ri2) != 1:
                         continue

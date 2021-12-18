@@ -7,7 +7,7 @@ from statematrix import StateMatrix
 from simstat import SimStat
 
 
-def simulate(params, sm:StateMatrix, fm:FileManager, input_file):
+def simulate(params, sm:StateMatrix, input_file:str):
     stagnations = 0
     best_ant:Ant = None
     best_distances:List[int] = []
@@ -30,8 +30,8 @@ def simulate(params, sm:StateMatrix, fm:FileManager, input_file):
         else:
             stagnations = 0
             best_ant = colony.best_ant
-    fm.save_stats(
-        SimStat(input_file.split('.')[0], params, best_distances)
+    FileManager().save_stats(
+        SimStat(input_file.split('.')[0], params, best_distances, best_ant.visited)
     )
 
 
@@ -52,7 +52,7 @@ def main():
         print(f"Starting with {input_file} file")
         sm_ = StateMatrix(start_vals)
         for params in combinations_param_list:
-            simulate(params, sm_.copy(), fm, input_file)
+            simulate(params, sm_.copy(), input_file)
 
 
 if __name__ == '__main__':

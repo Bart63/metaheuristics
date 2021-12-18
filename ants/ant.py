@@ -6,6 +6,7 @@ class Ant:
     def __init__(self, places_count:int):
         self.left = list(range(places_count))
         self.visited = []
+        self.min_val = float("1e-10")
         self.choose_random_place()
         
     def choose_random_place(self):
@@ -29,18 +30,24 @@ class Ant:
     
     def visit_place_prob(self, sm:StateMatrix, alfa, beta):
         cur_place = self.visited[-1]
-
         probabilities = []
         for place in self.left:
             idxs = sorted([cur_place, place])
-            road_pher = sm.matrix[idxs[1]][idxs[0]] ** alfa
-            road_heur = (1 / sm.matrix[idxs[0]][idxs[1]]) ** beta
-            prob = road_pher * road_heur
+
+            road_pheromone = sm.matrix[idxs[1]][idxs[0]] 
+            if road_pheromone < self.min_val:
+                road_pheromone = self.min_val
+            pher_weight = road_pheromone ** alfa
+
+            road_distance = sm.matrix[idxs[0]][idxs[1]]
+            if road_distance < self.min_val:
+                road_distance = self.min_val
+            heur_weight = (1 / road_distance) ** beta
+
+            prob = pher_weight * heur_weight
             probabilities.append(prob)
 
         prob_sum = sum(probabilities)
-        if prob_sum == 0:
-            prob_sum = float("1e-100")
         probabilities = [p/prob_sum for p in probabilities]
 
         chosen = self.roulette_selection(probabilities)
