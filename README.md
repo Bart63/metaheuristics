@@ -1,5 +1,5 @@
 # Metaheuristics
-Subject for uni.
+Projects for uni.
 
 ## Algorithms
 - BFS, DFS with many graph representations.
